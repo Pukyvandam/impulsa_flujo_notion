@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impulsa – Flujos y Entregables</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 24px 20px 40px; }
+
+  .phase-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 14px; margin: 28px 0 8px;
+    border-radius: 8px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .phase-i  { background: #EBF4FF; color: #1a5fa8; }
+  .phase-ii { background: #EDFAF2; color: #1a6e47; }
+  .phase-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .phase-i  .phase-dot { background: #2b7dd6; }
+  .phase-ii .phase-dot { background: #27a86e; }
+
+  .section-table { border: 1px solid #e5e5e5; border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  thead tr { background: #f8f8f8; }
+  th {
+    padding: 9px 10px; text-align: left; font-weight: 600;
+    font-size: 10.5px; color: #888; letter-spacing: 0.05em;
+    text-transform: uppercase; border-bottom: 1px solid #e5e5e5;
+    white-space: nowrap;
+  }
+  td { padding: 9px 10px; vertical-align: top; border-bottom: 1px solid #f0f0f0; line-height: 1.5; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 600; white-space: nowrap;
+  }
+  .b-hito    { background: #DCEFFE; color: #1a5fa8; }
+  .b-teoria  { background: #EBEBEB; color: #555; }
+  .b-sesion  { background: #D9F5E9; color: #1a6e47; }
+  .b-resumen { background: #FEF1D6; color: #8a5000; }
+  .b-cierre  { background: #FFE5E5; color: #b02020; }
+
+  .row-label { font-weight: 500; font-size: 11.5px; color: #555; margin-top: 3px; display: block; }
+
+  .dias { font-size: 12px; color: #333; white-space: nowrap; }
+  .dias small { display: block; font-size: 10px; color: #999; }
+
+  .resp { display: inline-block; padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 500; margin: 1px 2px 1px 0; }
+  .r-promora   { background: #F0EDFF; color: #4a3ab5; }
+  .r-impulsado { background: #FFF4E0; color: #8a5000; }
+  .r-ambos     { background: #E6FFF5; color: #0d6645; }
+
+  .ejecutor { font-size: 11px; color: #888; }
+  .canal { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 4px; border: 1px solid #e0e0e0; color: #666; white-space: nowrap; }
+
+  ul.ent { list-style: none; padding: 0; }
+  ul.ent li { font-size: 11.5px; color: #333; padding: 1.5px 0; display: flex; align-items: baseline; gap: 5px; }
+  ul.ent li::before { content: '→'; color: #bbb; font-size: 10px; flex-shrink: 0; }
+
+  .nota { font-size: 11px; color: #999; font-style: italic; line-height: 1.4; }
+
+  .legend { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; padding-top: 12px; border-top: 1px solid #f0f0f0; align-items: center; }
+  .legend-label { font-size: 11px; color: #aaa; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<div class="phase-header phase-i">
+  <div class="phase-dot"></div>
+  Fase I — Estrategia · Mentoría · Difusión
+</div>
+
+<div class="section-table">
+<table>
+  <thead>
+    <tr>
+      <th style="width:100px">Hito</th>
+      <th style="width:72px">Días</th>
+      <th style="width:100px">Responsable</th>
+      <th style="width:88px">Canal</th>
+      <th style="width:100px">Ejecutor</th>
+      <th>Entregables</th>
+      <th style="width:140px">Notas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge b-hito">Hito 0</span><span class="row-label">Contrato</span></td>
+      <td><div class="dias">0</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Mail + Firma</span></td>
+      <td><span class="ejecutor">Laura</span></td>
+      <td><ul class="ent"><li>Contrato firmado + pago</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 1</span><span class="row-label">Alta Impulsa</span></td>
+      <td><div class="dias">1 – 1</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent">
+        <li>Alta Impulsa</li>
+        <li>Entrega manual Impulsa</li>
+        <li>Apertura agenda web</li>
+        <li>Envío cuestionario web</li>
+        <li>Doc. requisitos material gráfico</li>
+        <li>Alta CRM</li>
+        <li>Entrega manual CRM</li>
+      </ul></td>
+      <td class="nota">¿Tenemos el manual CRM hecho?</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Mentoría 0</span><span class="row-label">Bienvenida</span></td>
+      <td><div class="dias">2 – 3</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Gonzalo + Laura<br>Coordina: Patricia</span></td>
+      <td><ul class="ent"><li>Reunión de bienvenida</li></ul></td>
+      <td class="nota">¿Se manda mail con keypoints?</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Toma de datos</span></td>
+      <td><div class="dias">3 – 6</div></td>
+      <td><span class="resp r-impulsado">Impulsado</span></td>
+      <td><span class="canal">Google Drive</span></td>
+      <td><span class="ejecutor">Patricia + Marketing</span></td>
+      <td><ul class="ent">
+        <li>Completa perfil en Impulsa</li>
+        <li>Completa cuestionario web</li>
+        <li>Entrega material gráfico (fotos/video)</li>
+        <li>Alta CRM</li>
+      </ul></td>
+      <td class="nota">MK revisa material; si incompleto → sesión videógrafo</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-sesion">Sesión práctica 1</span><span class="row-label">Video</span></td>
+      <td><div class="dias">4 – 7</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Videógrafo Promora</span></td>
+      <td><ul class="ent"><li>Indicaciones grabación para edición publicitaria</li></ul></td>
+      <td class="nota">Ignacio no entrega ningún doc</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 1</span></td>
+      <td><div class="dias">7</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 1</li><li>Valoraciones</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 2</span><span class="row-label">Mentoría (1) Estratégica</span></td>
+      <td><div class="dias">7 – 10</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Gonzalo + Laura</span></td>
+      <td><ul class="ent">
+        <li>Mail resumen</li>
+        <li>Estrategia</li>
+        <li>KCD (doc. KPIs y seguimiento)</li>
+      </ul></td>
+      <td class="nota">Requiere preparación de guión y análisis de la información facilitada</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 2</span></td>
+      <td><div class="dias">14</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 2</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 3</span><span class="row-label">Difusión</span></td>
+      <td><div class="dias">17 – 20</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Multicanal</span></td>
+      <td><span class="ejecutor">Marketing</span></td>
+      <td><ul class="ent">
+        <li>promora.com</li>
+        <li>jamesedition.com</li>
+        <li>Promora IG</li>
+        <li>Idealista</li>
+        <li>RRSS – campañas de pago</li>
+      </ul></td>
+      <td class="nota">Campañas de pago escalonadas</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-sesion">Sesión práctica 2</span><span class="row-label">RRSS</span></td>
+      <td><div class="dias">20 – 22</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Marketing</span></td>
+      <td><ul class="ent"><li>Sesión práctica RRSS</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 3</span></td>
+      <td><div class="dias">21</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 3</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<div class="phase-header phase-ii">
+  <div class="phase-dot"></div>
+  Fase II — Seguimiento
+</div>
+
+<div class="section-table">
+<table>
+  <thead>
+    <tr>
+      <th style="width:100px">Hito</th>
+      <th style="width:72px">Días</th>
+      <th style="width:100px">Responsable</th>
+      <th style="width:88px">Canal</th>
+      <th style="width:100px">Ejecutor</th>
+      <th>Entregables</th>
+      <th style="width:140px">Notas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge b-hito">Hito 4</span><span class="row-label">Leads</span></td>
+      <td><div class="dias"><small>Inmediato / 1 día lab. sig.</small></div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Leads</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 4</span></td>
+      <td><div class="dias">28</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 4</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-resumen">Resumen 1</span><span class="row-label">Síntesis mes 1</span></td>
+      <td><div class="dias">30 – 35</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Marketing</span></td>
+      <td><ul class="ent"><li>Mail resumen: pasos / key points / avances</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 5</span></td>
+      <td><div class="dias">35</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 5</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 5</span><span class="row-label">Check Control 1 (CC1)</span></td>
+      <td><div class="dias"><small>KCD: d35–37</small><small>Feedback: d37–39</small></div></td>
+      <td><span class="resp r-impulsado">Impulsado</span><br><span class="resp r-ambos">+ Promora</span></td>
+      <td><span class="canal">Drive / Teams</span></td>
+      <td><span class="ejecutor">Laura</span></td>
+      <td><ul class="ent"><li>KCD (impulsado)</li><li>Feedback (Laura)</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 6</span></td>
+      <td><div class="dias">42</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 6</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-sesion">Sesión práctica 3</span><span class="row-label">Video redes</span></td>
+      <td><div class="dias">45</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Jen y Cris</span></td>
+      <td><ul class="ent"><li>Entregable mejora videos personales</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 7</span></td>
+      <td><div class="dias">49</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 7</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 6</span><span class="row-label">Check Control 2 (CC2)</span></td>
+      <td><div class="dias"><small>KCD: d50–52</small><small>Feedback: d52–54</small></div></td>
+      <td><span class="resp r-impulsado">Impulsado</span><br><span class="resp r-ambos">+ Promora</span></td>
+      <td><span class="canal">Drive / Teams</span></td>
+      <td><span class="ejecutor">Gonzalo</span></td>
+      <td><ul class="ent"><li>KCD (impulsado)</li><li>Feedback (Gonzalo)</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 8</span></td>
+      <td><div class="dias">56</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 8</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-resumen">Resumen 2</span><span class="row-label">Síntesis mes 2</span></td>
+      <td><div class="dias">30 – 35</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Marketing</span></td>
+      <td><ul class="ent"><li>Mail resumen: pasos / key points / avances</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 9</span></td>
+      <td><div class="dias">63</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 9</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 6</span><span class="row-label">Check Control 3 (CC3)</span></td>
+      <td><div class="dias"><small>KCD: d65–67</small><small>Feedback: d67–71</small></div></td>
+      <td><span class="resp r-impulsado">Impulsado</span><br><span class="resp r-ambos">+ Promora</span></td>
+      <td><span class="canal">Drive / Teams</span></td>
+      <td><span class="ejecutor">Laura</span></td>
+      <td><ul class="ent"><li>KCD (impulsado)</li><li>Feedback (Laura)</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 10</span></td>
+      <td><div class="dias">70</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 10</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 11</span></td>
+      <td><div class="dias">77</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 11</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-hito">Hito 7</span><span class="row-label">Check Control 4 (CC4)</span></td>
+      <td><div class="dias"><small>KCD: d80–82</small><small>Feedback: d82–84</small></div></td>
+      <td><span class="resp r-impulsado">Impulsado</span><br><span class="resp r-ambos">+ Promora</span></td>
+      <td><span class="canal">Drive / Teams</span></td>
+      <td><span class="ejecutor">Gonzalo</span></td>
+      <td><ul class="ent"><li>KCD (impulsado)</li><li>Feedback (Gonzalo)</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-teoria">Teoría 12</span></td>
+      <td><div class="dias">84</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Patricia</span></td>
+      <td><ul class="ent"><li>Formación 12</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-resumen">Resumen 3</span><span class="row-label">Síntesis mes 3</span></td>
+      <td><div class="dias">30 – 35</div></td>
+      <td><span class="resp r-promora">Promora</span></td>
+      <td><span class="canal">Mail / Drive</span></td>
+      <td><span class="ejecutor">Marketing</span></td>
+      <td><ul class="ent"><li>Mail resumen: pasos / key points / avances</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+    <tr>
+      <td><span class="badge b-cierre">Hito 8</span><span class="row-label">Cierre</span></td>
+      <td><div class="dias">92 – 94</div></td>
+      <td><span class="resp r-ambos">Promora + Impulsado</span></td>
+      <td><span class="canal">Teams / Meet</span></td>
+      <td><span class="ejecutor">Todo el equipo</span></td>
+      <td><ul class="ent"><li>Resumen del programa: conclusiones</li></ul></td>
+      <td class="nota">—</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="legend">
+  <span class="legend-label">Leyenda:</span>
+  <span class="badge b-hito">Hito principal</span>
+  <span class="badge b-teoria">Teoría</span>
+  <span class="badge b-sesion">Sesión práctica</span>
+  <span class="badge b-resumen">Resumen mensual</span>
+  <span class="badge b-cierre">Cierre</span>
+  &nbsp;
+  <span class="resp r-promora">Promora</span>
+  <span class="resp r-impulsado">Impulsado</span>
+  <span class="resp r-ambos">Ambos</span>
+</div>
+
+</body>
+</html>
